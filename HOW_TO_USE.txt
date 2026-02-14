@@ -1,0 +1,187 @@
+
+╔═══════════════════════════════════════════════════════════════════╗
+║                                                                   ║
+║   🎯 HOW TO USE YOUR PAYROLL AUDITOR 🎯                          ║
+║                                                                   ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  METHOD 1: WEB INTERFACE (EASIEST!) 🌐
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Open Terminal and run:
+   cd /Users/esoria/Downloads
+   python3 api_server.py
+
+2. Open your browser to:
+   http://localhost:5000
+
+3. You'll see a beautiful interface:
+   - Click "Choose File" for File 1
+   - Select your first payroll file (CSV, Excel, or PDF)
+   - Click "Choose File" for File 2
+   - Select your second payroll file
+   - Click "🚀 Run Audit"
+   - See results instantly!
+
+✅ Best for: Visual results, easy file selection, sharing with others
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  METHOD 2: COMMAND LINE (QUICK!) ⚡
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Open Terminal and run:
+
+cd /Users/esoria/Downloads
+
+python3 universal_payroll_auditor.py \
+  "payroll_file1.csv" \
+  "payroll_file2.csv"
+
+Example with your files:
+python3 universal_payroll_auditor.py \
+  "payroll_journal_Thu Jan 01 2026 00_00_00 GMT-0500-Tue Mar 31 2026 23_59_59 GMT-0400 (1) (1).csv" \
+  "payroll_journal_Thu Jan 01 2026 00_00_00 GMT-0500-Tue Mar 31 2026 23_59_59 GMT-0400 (1).csv"
+
+Generate HTML report:
+python3 universal_payroll_auditor.py file1.csv file2.csv -o report.html -f html
+
+✅ Best for: Quick checks, automation, scripting
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  METHOD 3: IN GOOSE (INTEGRATED!) 🦆
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+In Goose, run:
+
+import sys
+sys.path.append('/Users/esoria/Downloads')
+from goose_payroll_auditor import audit, differences, report
+
+# Compare two files
+result = audit('file1.csv', 'file2.csv')
+print(result)
+
+# Show differences
+diffs = differences(limit=10)
+print(diffs)
+
+# Generate report
+report('audit_report.html', format='html')
+
+✅ Best for: Integration with Goose workflows, automation
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  EXAMPLE WORKFLOWS 📋
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎯 SCENARIO 1: Compare Two Specific Files
+──────────────────────────────────────────
+
+cd /Users/esoria/Downloads
+python3 universal_payroll_auditor.py \
+  "payroll_jan.csv" \
+  "payroll_feb.csv" \
+  -o january_audit.html -f html
+
+Then open: january_audit.html
+
+
+🎯 SCENARIO 2: Check All Files in a Folder
+──────────────────────────────────────────
+
+In Goose:
+from goose_payroll_auditor import batch
+result = batch('/Users/esoria/Downloads', 'payroll_*.csv')
+print(result)
+
+
+🎯 SCENARIO 3: Compare Latest Two Files
+──────────────────────────────────────────
+
+In Goose:
+from goose_payroll_auditor import latest
+result = latest('/Users/esoria/Downloads', 'payroll_*.csv')
+print(result)
+
+
+🎯 SCENARIO 4: Use Web Interface for Team
+──────────────────────────────────────────
+
+1. Start server:
+   python3 api_server.py
+
+2. Share with team:
+   "Go to http://YOUR-IP:5000"
+
+3. They upload files and see results!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  WHAT YOU'LL SEE 👀
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+The audit will show:
+
+📊 SUMMARY:
+• Total rows compared: 150
+• Rows matched: 142 ✓
+• Rows with differences: 8
+• Match rate: 94.67%
+
+🔍 FIELD DIFFERENCES:
+• overtime: 5 differences (Avg: 2.50)
+• federal_tax: 3 differences (Avg: 15.30)
+
+📋 DETAILED DIFFERENCES:
+1. John Smith
+   overtime: 5.0 → 8.0 (Δ: 3.00)
+   federal_tax: 250.00 → 265.50 (Δ: 15.50)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  TROUBLESHOOTING 🔧
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+❌ "No module named 'pandas'"
+   Fix: python3 -m pip install --user pandas numpy openpyxl
+
+❌ "No module named 'flask'"
+   Fix: python3 -m pip install --user flask werkzeug
+
+❌ "File not found"
+   Fix: Use full path or cd to the directory first
+
+❌ "Port 5000 already in use"
+   Fix: lsof -ti:5000 | xargs kill
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  QUICK REFERENCE 📖
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Command Line:
+  python3 universal_payroll_auditor.py file1.csv file2.csv
+  python3 universal_payroll_auditor.py file1.csv file2.csv -o report.html -f html
+  python3 universal_payroll_auditor.py file1.csv file2.csv -f json
+
+Web Interface:
+  python3 api_server.py
+  Open: http://localhost:5000
+
+Goose:
+  from goose_payroll_auditor import audit, batch, latest
+  audit('file1.csv', 'file2.csv')
+  batch('/path/to/files', '*.csv')
+  latest('/path/to/files')
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎉 TIP: Start with the WEB INTERFACE - it's the easiest!
+
+Just run:
+  python3 api_server.py
+
+Then open:
+  http://localhost:5000
+
+Drag, drop, click - done! ✨
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

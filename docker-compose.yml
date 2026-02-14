@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  payroll-auditor-api:
+    build: .
+    container_name: payroll-auditor
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - payroll-network
+
+networks:
+  payroll-network:
+    driver: bridge
