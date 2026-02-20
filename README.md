@@ -60,8 +60,8 @@ The auditor automatically detects and compares:
 
 | Category | Fields |
 |----------|--------|
-| **Employee Info** | Name, Employee ID |
-| **Time** | Pay Date, Pay Period |
+| **Employee Info** | Name|
+| **Time** | Pay Date |
 | **Hours** | Regular Hours, Overtime, PTO, Sick Hours |
 | **Earnings** | Gross Pay, Net Pay, Tips (Cash/Paycheck) |
 | **Taxes** | Federal Income Tax, Social Security, Medicare, State Tax, Local Tax, PFML |
